@@ -1,20 +1,22 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.support.wait import WebDriverWait
 import time
 import pygame
 import re
 import threading
-import smtplib
-from email.mime.text import MIMEText
-from email.utils import formataddr
+pygame.mixer.init()
 
 #button = browser.find_element_by_css_selector("button[data-comp='AddToBasketButton Button Box']") 
      
 class new_product_alarm(object):
     def __init__(self):
+        #chrome_options=Options()
+        #chrome_options.add_argument('--headless')
+        #chrome_options.add_argument('--disable-gpu')
+        #self.browser = webdriver.Chrome(chrome_options=chrome_options)
         self.browser = webdriver.Chrome()
         self.file_dir =r'noise.mp3'
-        pygame.mixer.init()
     
     def login(self, url):
         print('login+' + url)
@@ -25,7 +27,6 @@ class new_product_alarm(object):
     def login_child(self, url):
         pass
     
-
     def yes_or_no(self, url, default_time = 10):
         self.browser.get(url)
         time.sleep(5)
@@ -46,24 +47,17 @@ class new_product_alarm(object):
                 self.browser.refresh()
 
     def music_notice(self, default_time = 10):
+        self.thread = threading.Thread(target=self.music_notice_child)
+        self.thread.setDaemon(True)
+        self.thread.start()
+
+    def music_notice_child(self):
         pygame.mixer.music.load(self.file_dir)
         pygame.mixer.music.play()
-        time.sleep(default_time)
+        time.sleep(30)
         pygame.pygame.mixer.music.stop()
 
-    def email_notice(self,url, email_list, email_info):
-        for email in email_list:
-            try:
-                msg=MIMEText('你的丝芙兰商品已到货:网址'+ url,'plain','utf-8')
-                msg['From']=formataddr(["商品监控", email_info['my_sender'] ])  # 括号里的对应发件人邮箱昵称、发件人邮箱账号
-                msg['To']=formataddr(["收件人", email ])              # 括号里的对应收件人邮箱昵称、收件人邮箱账号
-                msg['Subject']="邮件主题-提醒到货"                # 邮件的主题，也可以说是标题
-                server=smtplib.SMTP_SSL("smtp.qq.com", 465)  # 发件人邮箱中的SMTP服务器，端口是465
-                server.login(email_info['my_sender'], email_info['my_pass'] )  # 括号中对应的是发件人邮箱账号、邮箱密码
-                server.sendmail(email_info['my_sender'],[email,],msg.as_string())  # 括号中对应的是发件人邮箱账号、收件人邮箱账号、发送邮件
-                server.quit()# 关闭连接
-            except Exception:# 如果 try 中的语句没有执行，则会执行下面的 ret=False
-                pass
+    
 
     def qq_notice(self):
         pass
