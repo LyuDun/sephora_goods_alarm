@@ -23,9 +23,6 @@
 1. 下载chromedriver：  [http://chromedriver.storage.googleapis.com/index.html](http://chromedriver.storage.googleapis.com/index.html)，将解压后的chromedriver.exe文件放到，chrome浏览器的安装位置。
 2. 将chrome浏览器的安装位置加到PATH，
 3. 下载本软件
-<<<<<<< HEAD
 4. 邮件提醒功能：商品到货后，会向你输入的的邮箱发送一条邮件。想要开启本功能，必须开启QQ邮箱的SMTP功能，开启方法可以[点击链接参考](https://jingyan.baidu.com/article/b0b63dbf1b2ef54a49307054.html), 获取到授权码后，将你的QQ邮箱号、授权码，填到软件的email、password位置。
-=======
->>>>>>> 2328484af5c0f9079eb2a0f3e7e9ca110e1b5114
 
 遇到其他问题可以提issues, 或者发邮件(cqcqhelloworld@gmail.com)
