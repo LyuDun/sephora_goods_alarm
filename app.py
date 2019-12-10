@@ -171,6 +171,7 @@ class App(object):
                 # 括号中对应的是发件人邮箱账号、收件人邮箱账号、发送邮件
                 server.sendmail(sender, [email, ], msg.as_string())
                 server.quit()
+                print(msg.as_string)
             except Exception as e:
                 print ("Error: unable to send email:  " + e)
 
