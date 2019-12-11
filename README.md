@@ -22,7 +22,7 @@
 使用方法
 1. 下载chromedriver：  [http://chromedriver.storage.googleapis.com/index.html](http://chromedriver.storage.googleapis.com/index.html)，将解压后的chromedriver.exe文件放到，chrome浏览器的安装位置。
 2. 将chrome浏览器的安装位置加到PATH，
-3. 下载本软件
+3. 下载本软件，[链接](https://github.com/LvDunn/sephora_goods_alarm/releases/tag/%E4%B8%9D%E8%8A%99%E5%85%B0%E6%96%B0%E5%93%81%E7%9B%91%E6%8E%A7v0.1)
 4. 邮件提醒功能：商品到货后，会向你输入的的邮箱发送一条邮件。想要开启本功能，必须开启QQ邮箱的SMTP功能，开启方法可以[点击链接参考](https://jingyan.baidu.com/article/b0b63dbf1b2ef54a49307054.html), 获取到授权码后，将你的QQ邮箱号、授权码，填到软件的email、password位置。
 
 遇到其他问题可以提issues, 或者发邮件(cqcqhelloworld@gmail.com)
