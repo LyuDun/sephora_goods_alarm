@@ -1,6 +1,4 @@
 # sephora_goods_alarm监控丝芙兰网站是否补货
-相同功能已经在我的网站实现， http://www.cqcqhelloworld.top/
-
 
 已完成的功能：
 - 自动监控此商品是否上新。
