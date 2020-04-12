@@ -151,12 +151,12 @@ class App(object):
     def email_notice(self, url, email):
         sender = self.sender_email.get()
         sender_pass = self.sender_pass.get()
-        print('sender:' + sender + 'email_pass:' + sender_pass + 'email' + email)
+        #print('sender:' + sender + 'email_pass:' + sender_pass + 'email' + email)
         if (sender == 'email') or (sender_pass == 'email_pass'):
             print('sender2:' + sender + 'email_pass:' + sender_pass + 'email' + email)
             return
         else:
-            try:
+            with logined(sender, sender_pass) as smtp_serv:
                 msg = MIMEText('你的丝芙兰商品已到货,网址:' + url, 'plain', 'utf-8')
                 # 括号里的对应发件人邮箱昵称、发件人邮箱账号
                 msg['From'] = formataddr(["商品监控", sender])
@@ -169,11 +169,21 @@ class App(object):
                 # 括号中对应的是发件人邮箱账号、邮箱密码
                 server.login(sender, sender_pass)
                 # 括号中对应的是发件人邮箱账号、收件人邮箱账号、发送邮件
-                server.sendmail(sender, [email, ], msg.as_string())
-                server.quit()
-                print(msg.as_string)
-            except Exception as e:
-                print ("Error: unable to send email:  " + e)
+                try:
+                    smtp_serv.send_message(msg)
+                finally:
+                    pass
+    @contextmanager
+    def logined(sender, password, smtp_host='smtp.qq.com', smtp_port=587):
+        smtp_serv = smtplib.SMTP(smtp_host, smtp_port, timeout=10)
+        try: # make smtp server and login
+            smtp_serv.ehlo_or_helo_if_needed()
+            smtp_serv.starttls()
+            smtp_serv.ehlo()
+            smtp_serv.login(sender, password)
+            yield smtp_serv
+        finally:
+            pass
 
 
 class jsonManage(object):
