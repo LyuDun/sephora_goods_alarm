@@ -28,7 +28,7 @@ class new_product_alarm(object):
     def login_child(self, url):
         pass
     
-    def yes_or_no(self, url, default_time = 10):
+    def yes_or_no(self, url):
         # 例如url:https://www.sephora.com/product/matte-velvet-skin-blurring-powder-foundation-P443566?skuId=2210052
         # 获取商品的编号
         pattern = re.compile(r"(?<=P)\d+")
@@ -66,22 +66,20 @@ class new_product_alarm(object):
                 api_json = api_response.json()
                 if api_json['currentSku']['skuId'] == skuId:
                     if api_json['currentSku']['actionFlags']['isAddToBasket'] == True:
-                        item['product_status'] = '01'
+                        return True
                     else:
-                        item['product_status'] = '00'
+                        return False
                 else:
                     for i in api_json['regularChildSkus']:
                         if i['skuId'] == skuId:
                             if i['actionFlags']['isAddToBasket'] == True:
-                                item['product_status'] = '01'
+                                return True
                             else:
-                                item['product_status'] = '00'
+                                return False
         except Exception as e:
             print('error-----' + str(e))
-        
-        yield item
 
-    def music_notice(self, default_time = 10):
+    def music_notice(self):
         self.thread = threading.Thread(target=self.music_notice_child)
         self.thread.setDaemon(True)
         self.thread.start()

@@ -3,6 +3,7 @@ from tkinter import ttk
 import tkinter.scrolledtext as tst
 import json
 import re
+import time
 from new_product import new_product_alarm as Alarm
 import threading
 import queue
@@ -137,17 +138,20 @@ class App(object):
 
     def go_child(self):
         global notice_list
-        try:
+        while True:
             url = q.get()
             alarm = Alarm()
             if(alarm.yes_or_no(url, 20) is True):
-                alarm.music_notice()
-                for notice in notice_list:
-                    if (str(notice).startswith('email')):
-                        print(str(notice).split('|')[1])
-                        self.email_notice(url, str(notice).split('|')[1])
-        except:
-            pass
+                try:
+                    alarm.music_notice()
+                    for notice in notice_list:
+                        if (str(notice).startswith('email')):
+                            #print(str(notice).split('|')[1])
+                            self.email_notice(url, str(notice).split('|')[1])
+                finally:
+                    break
+            else:
+                time.sleep(20)
 
     def email_notice(self, url, email):
         sender = self.sender_email.get()
