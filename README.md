@@ -15,12 +15,12 @@
 3. **暂不支持qq提醒功能，虽然有QQ号输入栏，但是目前不支持**
 4. **本程序仅适用于丝芙兰美网， 其他地区不适用**
 5. **打开丝芙兰网址(美网)需要代理，本程序不提供代理 ！**
-6. **新版本不再需要chromedriver，和chrome浏览器，但是目前还未打包为exe 1. release为旧版本，无法使用**
+6. **新版本不再需要chromedriver，和chrome浏览器，但是目前还未打包为exe release为旧版本，无法使用**
 
 ## 使用方法
 1. git clone https://github.com/LvDunn/sephora_goods_alarm.git
 2. cd sephora_goods_alarm
-3. pip install -r requirement.txt
+3. pip install -r requirements.txt
 4. pip install tkinter
 5. python app.py
 
