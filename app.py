@@ -141,7 +141,7 @@ class App(object):
         while True:
             url = q.get()
             alarm = Alarm()
-            if(alarm.yes_or_no(url, 20) is True):
+            if(alarm.yes_or_no(url) is True):
                 try:
                     alarm.music_notice()
                     for notice in notice_list:
